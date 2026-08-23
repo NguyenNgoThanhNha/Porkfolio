@@ -55,7 +55,7 @@ export const projects: Project[] = [
     categories: ["Enterprise Systems", "Backend", "Integration", "Full-stack"],
     summary:
       "A B2B sales and distribution platform for the steel industry: multi-version sales contracts, distributor sub-contracts, multi-level price approval and two-way SAP integration.",
-    highlights: ["ASP.NET Core 8", "CQRS", "SAP", "Quartz.NET", "ReactJS"],
+    highlights: ["ASP.NET Core 8", "CQRS", "Quartz.NET", "ReactJS"],
     problem:
       "Steel distribution runs on contracts that change constantly — prices are renegotiated, volumes are split across distributors, and the numbers have to stay consistent with SAP, which remains the system of record for orders, credit limits and receivables. Sales staff were tracking remaining volume and price approvals outside the system, so concurrent edits and stale pricing were a real risk.",
     solution:

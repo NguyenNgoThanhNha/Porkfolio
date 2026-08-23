@@ -42,7 +42,7 @@ export default function OpengraphImage() {
         </div>
 
         <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
-          {["C#", "ASP.NET Core", "CQRS", "SQL Server", "SAP", "Docker"].map(
+          {["C#", "ASP.NET Core", "CQRS", "SQL Server", "ReactJS", "Docker"].map(
             (tag) => (
               <div
                 key={tag}

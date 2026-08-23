@@ -51,7 +51,6 @@ export const site = {
     "SQL Server",
     "ReactJS",
     "Docker",
-    "SAP",
   ],
 } as const;
 
