@@ -12,6 +12,7 @@ const marks: Record<string, (props: LogoProps) => ReactNode> = {
   "vacs-catering": VacsMark,
   "solace-spa": SolaceMark,
   "helpdesk-ticketing": HelpdeskMark,
+  "inventory-warehouse": InventoryMark,
 };
 
 const tiles: Record<string, string> = {
@@ -22,6 +23,7 @@ const tiles: Record<string, string> = {
   "vacs-catering": "from-[#1e293b] to-[#334155] text-[#fdba74]",
   "solace-spa": "from-[#115e59] to-[#0d9488] text-[#ccfbf1]",
   "helpdesk-ticketing": "from-[#172554] to-[#1d4ed8] text-[#bae6fd]",
+  "inventory-warehouse": "from-[#422006] to-[#b45309] text-[#fde68a]",
 };
 
 export function ProjectLogo({
@@ -178,6 +180,22 @@ function HelpdeskMark(props: LogoProps) {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
+    </svg>
+  );
+}
+
+function InventoryMark(props: LogoProps) {
+  return (
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M4 13 16 6l12 7v13H4V13Z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <rect x="9" y="18" width="6" height="5" stroke="currentColor" strokeWidth="1.4" />
+      <rect x="17" y="18" width="6" height="5" stroke="currentColor" strokeWidth="1.4" />
+      <rect x="13" y="13" width="6" height="5" stroke="currentColor" strokeWidth="1.4" />
     </svg>
   );
 }

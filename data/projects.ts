@@ -441,6 +441,87 @@ export const projects: Project[] = [
     repoUrl: "https://github.com/NguyenNgoThanhNha/Helpdesk-Ticketing",
   },
   {
+    id: "inventory-warehouse",
+    title: "Inventory Warehouse",
+    subtitle: "Concurrency-safe Inventory & Warehouse Management",
+    period: "09/2026 – Present",
+    role: "Full-stack Developer (personal project)",
+    confidential: false,
+    categories: ["Backend", "Full-stack"],
+    summary:
+      "Multi-warehouse inventory where stock can never go wrong or negative under concurrent use: goods receipts, issues, atomic transfers and stock-takes over an immutable ledger, with a Kardex report, Redis-cached dashboard and batch Excel import.",
+    highlights: [".NET 10", "Optimistic Concurrency", "Redis", "ReactJS", "TanStack Virtual"],
+    problem:
+      "When several people issue goods from the same warehouse at once, naive read-then-write code oversells stock that is almost gone, totals drift away from the documents behind them, and large catalogues make both the stock screen and spreadsheet imports painfully slow.",
+    solution:
+      "Every stock change goes through a single StockLedger that writes an immutable StockMovement, so the ledger always sums to on-hand stock. Row-version optimistic concurrency with a retry behaviour re-reads stock on conflict and either posts the document or rejects it with 409 and per-line shortages; negative stock is blocked in three layers down to a database CHECK constraint, and Idempotency-Key makes double submits create exactly one document. Reporting runs on stored procedures with window functions (Kardex running balance, a six-table dashboard) behind Redis caching, and the React front end renders 12,000+ SKUs in a virtualised, server-paged table.",
+    responsibilities: [
+      "Designed the stock ledger and document lifecycle (Draft → Posted / Cancelled) for goods receipts, goods issues, atomic warehouse transfers and stock-takes.",
+      "Prevented overselling with row-version optimistic concurrency and a conflict-retry pipeline behaviour, proven by concurrent integration tests (6 parallel issues on 10 units → 3 accepted, 3 rejected, 1 left).",
+      "Enforced non-negative stock in three layers (ledger check, domain Adjust, SQL CHECK constraint) and added Idempotency-Key support backed by a unique index.",
+      "Wrote the Kardex report with a window-function running balance that stays correct across pages, plus a six-table dashboard stored procedure cached for 30 seconds in Redis with graceful fallback to the database.",
+      "Built batch Excel import with a dry-run step, row-level error reporting and 500-row batches (10,000 rows in a few seconds), and filtered stock/Kardex exports.",
+      "Added a background low-stock alert service with one open alert per product and warehouse, safe across multiple instances, and summarised notifications per warehouse.",
+      "Built the React 19 front end: virtualised infinite stock table, one document form for four document types with live stock checks, catalogue screens, Kardex and a dashboard.",
+      "Tested with 48 unit and 21 SQL Server integration tests plus 65 front-end tests; set up Docker Compose for dev and prod, GitHub Actions CI and CD to GHCR with SSH deploy.",
+    ],
+    technologies: [
+      ".NET 10",
+      "ASP.NET Core",
+      "Clean Architecture",
+      "MediatR / CQRS",
+      "Entity Framework Core",
+      "SQL Server",
+      "Stored Procedures",
+      "Redis",
+      "Optimistic concurrency",
+      "EPPlus / Excel",
+      "ReactJS",
+      "TypeScript",
+      "shadcn/ui",
+      "TanStack Query",
+      "TanStack Virtual",
+      "xUnit",
+      "Testcontainers",
+      "Vitest",
+      "Docker Compose",
+      "GitHub Actions",
+    ],
+    architecture: {
+      description:
+        "Built on the Helpdesk Clean Architecture template: a create-and-post request flows through validation and a conflict-retry behaviour into a document writer, a poster that turns documents into stock changes, and the single StockLedger — all committed in one SaveChanges transaction.",
+      layers: [
+        {
+          title: "Client",
+          nodes: [
+            { label: "React 19 + shadcn/ui", kind: "client" },
+            { label: "Virtualised stock table", kind: "client" },
+          ],
+        },
+        {
+          title: "Application",
+          nodes: [
+            { label: "Stock documents + ledger", kind: "service" },
+            { label: "Conflict retry + idempotency", kind: "service" },
+            { label: "Excel import / export", kind: "service" },
+            { label: "Low-stock alert service", kind: "service" },
+          ],
+        },
+        {
+          title: "Data & Platform",
+          nodes: [
+            { label: "SQL Server + stored procedures", kind: "data" },
+            { label: "Redis cache", kind: "data" },
+            { label: "GHCR · Docker · GitHub Actions", kind: "external" },
+          ],
+        },
+      ],
+    },
+    accent: "steel",
+    coverImage: "/projects/inventory-warehouse.webp",
+    repoUrl: "https://github.com/NguyenNgoThanhNha/Inventory-Warehouse",
+  },
+  {
     id: "solace-spa",
     title: "Solace SPA",
     subtitle: "AI-assisted Skincare Application",
