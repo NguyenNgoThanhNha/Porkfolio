@@ -437,6 +437,7 @@ export const projects: Project[] = [
       ],
     },
     accent: "cyan",
+    coverImage: "/projects/helpdesk-ticketing.webp",
     repoUrl: "https://github.com/NguyenNgoThanhNha/Helpdesk-Ticketing",
   },
   {
