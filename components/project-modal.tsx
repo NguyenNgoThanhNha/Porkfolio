@@ -13,6 +13,7 @@ import {
 
 import type { Project } from "@/data/projects";
 import { ArchitectureDiagram } from "@/components/architecture-diagram";
+import { GithubIcon } from "@/components/icons";
 import { TechBadge } from "@/components/tech-badge";
 import { ProjectLogo } from "@/components/project-logo";
 
@@ -158,6 +159,17 @@ export function ProjectModal({
                 <Lock className="h-3.5 w-3.5" aria-hidden />
                 Client system — described at a high level
               </span>
+            ) : null}
+            {project.repoUrl ? (
+              <a
+                href={project.repoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-[var(--accent)] hover:underline"
+              >
+                <GithubIcon className="h-3.5 w-3.5" />
+                Source code
+              </a>
             ) : null}
           </div>
 

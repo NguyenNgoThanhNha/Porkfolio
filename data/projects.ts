@@ -40,6 +40,8 @@ export type Project = {
   accent: "cyan" | "steel" | "navy";
   /** Atmospheric cover in /public/projects — not a client screenshot. */
   coverImage?: string;
+  /** Public source repository, shown for personal projects. */
+  repoUrl?: string;
 };
 
 export const projects: Project[] = [
@@ -358,6 +360,84 @@ export const projects: Project[] = [
     },
     accent: "navy",
     coverImage: "/projects/vacs-catering.webp",
+  },
+  {
+    id: "helpdesk-ticketing",
+    title: "Helpdesk Ticketing",
+    subtitle: "Customer Support & SLA Tracking System",
+    period: "09/2026 – Present",
+    role: "Full-stack Developer (personal project)",
+    confidential: false,
+    categories: ["Backend", "Full-stack"],
+    summary:
+      "A helpdesk where customers raise tickets and agents work them through a validated status lifecycle, with SLA deadlines per priority, a background SLA monitor, audit history and fine-grained C/R/U/D permissions.",
+    highlights: [".NET 10", "Clean Architecture", "CQRS", "ReactJS", "shadcn/ui"],
+    problem:
+      "Support requests arriving by email and chat get lost, nobody can say who owns a request or whether it is about to breach its response time, and a simple role check is not enough once some agents need extra rights and others need fewer.",
+    solution:
+      "A .NET 10 API built on Clean Architecture with MediatR/CQRS, FluentValidation and a generic Unit of Work, in which tickets move through an explicit state machine (New → Open → InProgress → Pending → Resolved → Closed) and every priority carries its own response and resolution deadlines. A hosted background service scans for tickets that are about to breach or have breached SLA, while a six-table permission model grants (activity, C/R/U/D) rights per role and per account. The React 19 + TypeScript front end uses shadcn/ui and TanStack Query/Table with server-side paging, and hides menus, routes and actions the user is not allowed to use.",
+    responsibilities: [
+      "Designed the Clean Architecture layout (Domain / Persistence / Application / Infrastructure / Api) with a MediatR pipeline for logging and validation.",
+      "Modelled the ticket lifecycle as a state machine with comments, attachments, assignment and an audit trail of status, priority and assignee changes.",
+      "Built SLA policies per priority and a background service that flags overdue and at-risk tickets and raises in-app notifications.",
+      "Implemented JWT authentication with refresh-token rotation and permission-based authorisation over six Sys_* tables, with cached effective permissions.",
+      "Added request/response API logging with masked secrets, traceable from the ProblemDetails traceId for debugging.",
+      "Built the React 19 front end: ticket list with server-side filter/sort/paging, ticket detail timeline, role and permission matrix screens and a Recharts dashboard.",
+      "Covered the system with xUnit + NSubstitute unit tests, SQL Server integration tests (Testcontainers) and Vitest + RTL + MSW front-end tests; containerised with Docker Compose and GitHub Actions CI.",
+    ],
+    technologies: [
+      ".NET 10",
+      "ASP.NET Core",
+      "Clean Architecture",
+      "MediatR / CQRS",
+      "FluentValidation",
+      "Mapster",
+      "Entity Framework Core",
+      "SQL Server",
+      "JWT",
+      "Serilog",
+      "ReactJS",
+      "TypeScript",
+      "shadcn/ui",
+      "TanStack Query",
+      "Zustand",
+      "xUnit",
+      "Testcontainers",
+      "Vitest",
+      "Docker Compose",
+      "GitHub Actions",
+    ],
+    architecture: {
+      description:
+        "Clean Architecture with thin controllers: each request flows Controller [HasPermission] → MediatR → logging and validation behaviours → handler → Unit of Work, saved once per request, while a hosted service drives the SLA scan on a timer.",
+      layers: [
+        {
+          title: "Client",
+          nodes: [
+            { label: "React 19 + shadcn/ui", kind: "client" },
+            { label: "Permission-aware routing", kind: "client" },
+          ],
+        },
+        {
+          title: "Application",
+          nodes: [
+            { label: "Ticket state machine", kind: "service" },
+            { label: "SLA monitor service", kind: "service" },
+            { label: "6-table permission model", kind: "service" },
+            { label: "API request logging", kind: "service" },
+          ],
+        },
+        {
+          title: "Data & Platform",
+          nodes: [
+            { label: "SQL Server (EF Core)", kind: "data" },
+            { label: "Docker Compose · GitHub Actions", kind: "external" },
+          ],
+        },
+      ],
+    },
+    accent: "cyan",
+    repoUrl: "https://github.com/NguyenNgoThanhNha/Helpdesk-Ticketing",
   },
   {
     id: "solace-spa",

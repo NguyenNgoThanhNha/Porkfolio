@@ -11,6 +11,7 @@ const marks: Record<string, (props: LogoProps) => ReactNode> = {
   "npp-hr": NppMark,
   "vacs-catering": VacsMark,
   "solace-spa": SolaceMark,
+  "helpdesk-ticketing": HelpdeskMark,
 };
 
 const tiles: Record<string, string> = {
@@ -20,6 +21,7 @@ const tiles: Record<string, string> = {
   "npp-hr": "from-[#134e4a] to-[#0f766e] text-[#99f6e4]",
   "vacs-catering": "from-[#1e293b] to-[#334155] text-[#fdba74]",
   "solace-spa": "from-[#115e59] to-[#0d9488] text-[#ccfbf1]",
+  "helpdesk-ticketing": "from-[#172554] to-[#1d4ed8] text-[#bae6fd]",
 };
 
 export function ProjectLogo({
@@ -154,6 +156,27 @@ function SolaceMark(props: LogoProps) {
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function HelpdeskMark(props: LogoProps) {
+  return (
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M5 10.5A2.5 2.5 0 0 1 7.5 8h17A2.5 2.5 0 0 1 27 10.5v2.3a3.2 3.2 0 0 0 0 6.4v2.3a2.5 2.5 0 0 1-2.5 2.5h-17A2.5 2.5 0 0 1 5 21.5v-2.3a3.2 3.2 0 0 0 0-6.4v-2.3Z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <path d="M20.5 8v16" stroke="currentColor" strokeWidth="1.4" strokeDasharray="2 2" />
+      <path
+        d="m10.5 16 2 2 4-4.5"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
